@@ -18,5 +18,5 @@ month's weekly reviews, tracking files, scorecard, and active goal files.
    - Parking-lot growth (a rising count mid-cycle is a signal, not a failure).
 2. **Reset reminder**: cycle at week 10+ → state the reset date; `/gps-reset` due
    week 12.
-3. **Send** one `[GPS] <Month> rollup:` message via the configured channel —
-   3–5 lines, worst news first (or per tone).
+3. **Send** one `[GPS] <Month> rollup:` message per the channel-dispatch rules in
+   `CLAUDE.md` — 3–5 lines, worst news first (or per tone).

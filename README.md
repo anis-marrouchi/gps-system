@@ -32,8 +32,9 @@ The method: [`method/gps-adapted.md`](method/gps-adapted.md).
 1. **Onboard once** — `/gps-onboard` in Claude Code walks you through up to 3 goals
    (hard cap, by design) for a 12-week cycle: metric, why, milestones, honesty checks,
    obstacles, if-thens. Ideas beyond 3 go to a parking lot.
-2. **Daily** — one short `[GPS]` message on WhatsApp at your chosen time: today's lead
-   action per goal + anti-goal check. Reply `done`/`skip`. Thirty seconds.
+2. **Daily** — one short `[GPS]` message at your chosen time, on the channel you pick:
+   **email** (works out of the box with any mail CLI), WhatsApp, or Telegram. Today's
+   lead action per goal + anti-goal check. Reply `done`/`skip`. Thirty seconds.
 3. **Sunday** — your scorecard arrives; `/gps-weekly` closes the week in 5 minutes.
    If you've invited an accountability partner, your weekly report goes to them after
    your confirm.
@@ -50,8 +51,10 @@ claude                                              # then type: /gps-onboard
 ./system/install-schedules.sh                       # macOS launchd: daily/weekly/monthly
 ```
 
-Requires: [Claude Code](https://claude.com/claude-code), and
-[wacli](https://wacli.sh) if you want WhatsApp delivery.
+Requires: [Claude Code](https://claude.com/claude-code). Channels: **email** needs any
+mail CLI (`gog`, `himalaya`, or plain `mail`); **WhatsApp** needs
+[wacli](https://wacli.sh); **Telegram** needs a bot token; or run channel `none` and
+read your nudges in the terminal/log.
 
 ## Accountability partner
 

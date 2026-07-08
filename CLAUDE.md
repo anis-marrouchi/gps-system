@@ -28,8 +28,25 @@ generated with private data and is gitignored too. Framework files must stay gen
 
 ## Configuration (data/config.json)
 
-`user_name`, `channel` (whatsapp | telegram | none), `whatsapp_jid`, `nudge_time`,
-`tone`, `partner` (null or `{name, channel, jid_or_handle}`), `dashboard_artifact_url`.
+`user_name`, `channel` (whatsapp | email | telegram | none), `whatsapp_jid`,
+`email_to`, `telegram_chat_id`, `nudge_time`, `tone`, `partner` (null or
+`{name, channel, jid_or_handle}`), `dashboard_artifact_url`.
+
+## Channel dispatch (all rituals send this way)
+
+Read `channel` from config and deliver accordingly — skills never hardcode a channel:
+
+- `whatsapp` → `wacli send text --to <whatsapp_jid> --message "<msg>"`
+- `email` → subject = the message's first line (starts with `[GPS]`), body = the rest.
+  Use whatever mail CLI exists on the machine, in this order of preference:
+  `gog gmail send`, `himalaya`, `mail`/`sendmail`. If none is available, log the
+  message to `logs/undelivered.log` and say so in the ritual output — never fail
+  silently.
+- `telegram` → Bot API `sendMessage` to `telegram_chat_id` (bot token from the
+  `GPS_TELEGRAM_TOKEN` env var).
+- `none` → write the message to `logs/messages.log` only (terminal-only mode).
+
+Partner messages use the partner's own `channel` from config, same dispatch rules.
 
 ## File conventions
 

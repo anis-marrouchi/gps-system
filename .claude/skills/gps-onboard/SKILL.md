@@ -11,7 +11,8 @@ Read `CLAUDE.md`, `method/gps-adapted.md`, and `data/config.json` first. This is
 ## Steps
 
 0. **First run only** (no `data/config.json` or `data/profile.md`): create them.
-   Config: name, channel (whatsapp/telegram/none + JID/handle), nudge time, tone
+   Config: name, channel (email/whatsapp/telegram/none + address/JID/handle — email
+   is the zero-dependency default), nudge time, tone
    (full-scorecard / firm / log-only), partner (offer `/gps-partner`, can skip).
    Profile: ask about past follow-through honestly — when do they deliver (external
    deadlines? bursts?), how do goals usually die (drift week? shiny objects? overload?),

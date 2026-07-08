@@ -34,5 +34,5 @@ files in the current cycle dir, `data/goals/anti-goals.md`, and the last ~7 line
    ```
 
    Drift callouts per config tone: `full-scorecard` → `g2: untouched 5d`.
-5. **Send** via the channel in `data/config.json` (whatsapp → `wacli send text --to
-   <whatsapp_jid>`). Only ever to the owner's own JID — never the partner.
+5. **Send** per the channel-dispatch rules in `CLAUDE.md` (whatsapp / email /
+   telegram / none). Only ever to the owner — never the partner.

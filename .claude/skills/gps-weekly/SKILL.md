@@ -22,7 +22,7 @@ Tone from `data/config.json`. Read `CLAUDE.md`, `data/config.json`, active goal 
    - Next week's WOOP re-check: the most likely obstacle THIS week + its if-then.
    - **If partner configured**: a drafted partner report (short, factual scorecard
      summary) marked `PENDING OWNER APPROVAL`.
-4. **Send summons** to the owner via the configured channel:
+4. **Send summons** to the owner per the channel-dispatch rules in `CLAUDE.md`:
    `[GPS] Wnn scorecard: g1 71% · g2 40% SLIPPING (M2 +1w) · anti: 2 late nights. Run /gps-weekly to close it.`
 5. Never send anything to the partner in Mode A.
 
@@ -34,6 +34,7 @@ Tone from `data/config.json`. Read `CLAUDE.md`, `data/config.json`, active goal 
 2. Goal stalled 2+ weeks → force a decision: recommit (with what change?), shrink,
    or park (frees a slot only at reset).
 3. **Partner report**: show the drafted report; owner may edit; send ONLY on explicit
-   confirm, via the partner's channel in config. Record sent/skipped in the review.
+   confirm, via the partner's channel (dispatch rules in `CLAUDE.md`). Record
+   sent/skipped in the review.
 4. Mark the review completed, save files.
 5. Refresh the dashboard (`/gps-dashboard`).

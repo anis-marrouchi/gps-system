@@ -14,8 +14,9 @@ goal success in Matthews' study; monitoring effects grow when progress is shared
 
 ## Why people would pay
 
-- No self-hosting, no CLI, no API keys: onboard in chat (WhatsApp/Telegram), get the
-  dashboard as a link.
+- No self-hosting, no CLI, no API keys: onboard in chat (WhatsApp/Telegram) or by
+  email, get the dashboard as a link. Email delivery also sidesteps WhatsApp Business
+  API onboarding for the earliest users.
 - The partner needs zero setup: they just receive a readable weekly report.
 - The report is the deliverable: honest, specific, consistent — the thing humans are
   bad at doing for themselves.
