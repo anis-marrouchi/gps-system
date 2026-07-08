@@ -279,6 +279,19 @@
   </form>
 </dialog>
 
+<dialog id="dlg-mile">
+  <h3 id="mile-title"></h3>
+  <p class="sub" id="mile-text"></p>
+  <p style="font-size:13.5px; margin:0 0 4px" class="num" id="mile-due"></p>
+  <p style="font-size:13.5px; margin:0 0 14px; color:var(--ink-soft)" id="mile-status"></p>
+  <div class="dlg-actions">
+    <button class="btn" onclick="this.closest('dialog').close()">Close</button>
+    <button class="btn" id="mile-undo">Not done — undo</button>
+    <button class="btn" id="mile-adjust">Adjust this step</button>
+    <button class="btn primary" id="mile-done">Mark done ✓</button>
+  </div>
+</dialog>
+
 <dialog id="dlg-cmd">
   <h3 id="cmd-title">One step left</h3>
   <div class="steps123">
@@ -348,8 +361,10 @@ window.GPS_DATA = {
 (function () {
   var D = window.GPS_DATA, $ = function (s) { return document.querySelector(s); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); };
+  var LS_KEY = "gps-local-done-v2"; // v2: v1 had click-to-done accidents
   var localDone = {};
-  try { localDone = JSON.parse(localStorage.getItem("gps-local-done") || "{}"); } catch (e) {}
+  try { localDone = JSON.parse(localStorage.getItem(LS_KEY) || "{}"); } catch (e) {}
+  function saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify(localDone)); } catch (e) {} }
 
   document.title = "GPS — " + D.cycle.name;
   $("#hud-stats").innerHTML = '<div class="stat"><span class="label">Cycle</span><span class="v din">' + esc(D.cycle.name) + '<small> ' + esc(D.cycle.start) + " → " + esc(D.cycle.end) + '</small></span></div>' +
@@ -489,12 +504,7 @@ window.GPS_DATA = {
     var z = e.target.closest(".dropzone"); if (!z || !dragData) return;
     e.preventDefault(); z.classList.remove("over");
     if (z.hasAttribute("data-donezone") && dragData.type === "milestone" && z.getAttribute("data-donezone") === dragData.goal) {
-      localDone[dragData.id] = true;
-      try { localStorage.setItem("gps-local-done", JSON.stringify(localDone)); } catch (err) {}
-      dragData.el.classList.add("done"); dragData.el.classList.remove("next"); dragData.el.setAttribute("draggable", "false");
-      dragData.el.querySelector(".grip").textContent = "✓";
-      var r = z.getBoundingClientRect(); burst(r.left + r.width / 2, r.top);
-      showCmd("Nice. Make it official →", "Mark milestone done: " + dragData.name + "\nUpdate the goal file, tracking log and refresh the dashboard.");
+      markDone(dragData.el, z.getBoundingClientRect());
     }
     if (z.id === "parkzone" && dragData.type === "goal") {
       var g = D.goals.filter(function (x) { return x.id === dragData.id; })[0];
@@ -502,17 +512,51 @@ window.GPS_DATA = {
     }
     dragData = null;
   });
-  // click fallback (mobile / no-drag): tap a not-done milestone → confirm done
+  // clicking a milestone opens its DETAIL view — nothing changes without an explicit action
+  function markDone(el, rect) {
+    localDone[el.getAttribute("data-mid")] = true; saveLocal();
+    el.classList.add("done"); el.classList.remove("next"); el.setAttribute("draggable", "false");
+    el.querySelector(".grip").textContent = "✓";
+    if (rect) burst(rect.left + rect.width / 2, rect.top);
+    showCmd("Nice. Make it official →", "Mark milestone done: " + el.getAttribute("data-mname") + "\nUpdate the goal file, tracking log and refresh the dashboard.");
+  }
+  var mileEl = null;
   document.addEventListener("click", function (e) {
     var m = e.target.closest("[data-mid]");
-    if (m && m.getAttribute("draggable") === "true" && !e.target.closest(".help")) {
-      var r = m.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + scrollY ? r.top : r.top);
-      localDone[m.getAttribute("data-mid")] = true;
-      try { localStorage.setItem("gps-local-done", JSON.stringify(localDone)); } catch (err) {}
-      m.classList.add("done"); m.classList.remove("next"); m.setAttribute("draggable", "false");
-      m.querySelector(".grip").textContent = "✓";
-      showCmd("Nice. Make it official →", "Mark milestone done: " + m.getAttribute("data-mname") + "\nUpdate the goal file, tracking log and refresh the dashboard.");
+    if (!m || e.target.closest(".help")) return;
+    mileEl = m;
+    var mid = m.getAttribute("data-mid"), goal = null, mile = null;
+    D.goals.forEach(function (g) { g.milestones.forEach(function (x) { if (x.id === mid) { goal = g; mile = x; } }); });
+    if (!mile) return;
+    var isDataDone = mile.done, isLocalDone = !!localDone[mid];
+    $("#mile-title").textContent = goal.title + " · " + mile.m;
+    $("#mile-text").textContent = mile.text;
+    $("#mile-due").textContent = "Due " + mile.due;
+    $("#mile-status").textContent = isDataDone ? "Done (recorded)" : isLocalDone ? "Marked done here — not yet recorded by Claude" : (mile.next ? "Current step" : "Upcoming");
+    $("#mile-done").style.display = (isDataDone || isLocalDone) ? "none" : "";
+    $("#mile-undo").style.display = isLocalDone && !isDataDone ? "" : "none";
+    $("#dlg-mile").showModal();
+  });
+  $("#mile-done").addEventListener("click", function () {
+    $("#dlg-mile").close();
+    if (mileEl) markDone(mileEl, mileEl.getBoundingClientRect());
+  });
+  $("#mile-undo").addEventListener("click", function () {
+    if (mileEl) {
+      delete localDone[mileEl.getAttribute("data-mid")]; saveLocal();
+      mileEl.classList.remove("done"); mileEl.setAttribute("draggable", "true");
+      mileEl.querySelector(".grip").textContent = "⋮⋮";
     }
+    $("#dlg-mile").close();
+  });
+  $("#mile-adjust").addEventListener("click", function () {
+    $("#dlg-mile").close();
+    if (!mileEl) return;
+    $("#adj-goal").innerHTML = D.goals.map(function (g) { return "<option>" + esc(g.title) + "</option>"; }).join("");
+    var f = $("#f-adjust");
+    f.elements.desc.value = mileEl.getAttribute("data-mname").split(" · ")[1] + ": ";
+    $("#dlg-adjust").showModal();
+    f.elements.desc.focus();
   });
 
   // ---------- action modals ----------
@@ -564,7 +608,7 @@ window.GPS_DATA = {
   var TOUR = [
     { sel: "#t-road", t: "Your 12 weeks, as a road", x: "The car is today. The signposts are your milestone dates. If the blue line stalls, so did you — no interpretation needed." },
     { sel: "#t-cols", t: "G · P · S", x: "Goal (where + why), Plan (the dated route), System (the machine that keeps you moving). Most tools stop at G. The whole method is that all three exist, in writing." },
-    { sel: "#lanes", t: "Cards, not chores", x: "Each goal is one lane. The highlighted plan card is your current step — drag it onto ✓ when it's done and enjoy the confetti. Every action ends as a small note you paste into Claude." },
+    { sel: "#lanes", t: "Cards, not chores", x: "Each goal is one lane. Click any plan card to see its details, adjust it, or mark it done — or drag it onto ✓ for the confetti. Nothing changes until you choose an action." },
     { sel: "#t-score", t: "Sunday truth", x: "Scored weekly: shipped or not. Recording progress is the strongest lever in the research (138-study meta-analysis)." },
     { sel: "#parkzone", t: "The shiny-object trap", x: "New ideas are welcome — in the parking lot. Drag a goal here to park it, click to park an idea. Reviewed at week 12, promoted only if it beats what you're doing." },
     { sel: "#t-credits", t: "Standing on giants", x: "The GPS frame is Ali Abdaal's (he credits Alex Hormozi). We pressure-tested every step against the actual research and kept what survives. Open source — share it." }
