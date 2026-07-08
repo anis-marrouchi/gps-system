@@ -70,8 +70,8 @@
   .road .done { position: absolute; left: 0; top: 26px; height: 8px; background: var(--route); border-radius: 4px 0 0 4px; }
   .road .stop { position: absolute; top: 21px; width: 2px; height: 18px; background: var(--ink-soft); }
   .road .stop span { position: absolute; top: 20px; left: -23px; width: 48px; text-align: center; font-size: 10px; color: var(--ink-soft); white-space: nowrap; }
-  .road .car { position: absolute; top: 6px; font-size: 22px; transform: translateX(-50%) scaleX(-1); filter: drop-shadow(0 2px 2px #0003); }
-  .road .car span { position: absolute; top: -14px; left: 50%; transform: translateX(-50%) scaleX(-1); font-size: 10px; font-weight: 700; letter-spacing: .08em; font-family: inherit; }
+  .road .you { position: absolute; top: 22px; width: 16px; height: 16px; margin-left: -8px; background: var(--pos); border-radius: 50%; border: 3px solid var(--panel); box-shadow: 0 0 0 1px var(--panel-edge); }
+  .road .you span { position: absolute; bottom: 19px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; letter-spacing: .1em; white-space: nowrap; color: var(--ink); }
 
   /* ---- GPS board ---- */
   .board-head { display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 14px; }
@@ -111,9 +111,8 @@
   .dropzone.park.over { border-color: var(--warn); background: color-mix(in srgb, var(--warn) 8%, transparent); color: var(--warn); }
 
   .sys { display: flex; flex-direction: column; gap: 8px; }
-  .scard { display: flex; gap: 10px; align-items: center; padding: 10px 12px; font-size: 13px; }
-  .scard .ico { font-size: 16px; flex: none; }
-  .scard .k { font-weight: 600; display: block; font-size: 12px; }
+  .scard { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; font-size: 13px; }
+  .scard .k { font-weight: 600; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--route); }
   .scard .v { color: var(--ink-soft); }
   .scard.cta { border-style: dashed; cursor: pointer; background: none; width: 100%; text-align: left; }
   .scard.cta:hover { border-color: var(--route); }
@@ -161,7 +160,6 @@
   #tour-card .prog { color: var(--ink-soft); font-size: 12px; }
   .tour-spot { position: relative; z-index: 85; box-shadow: 0 0 0 4px var(--pos), 0 0 0 9999px var(--scrim) !important; border-radius: 8px; }
 
-  #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
   footer { color: var(--ink-soft); font-size: 12px; text-align: center; }
   footer code { font-family: "SF Mono", Menlo, monospace; font-size: 11px; }
   @media (prefers-reduced-motion: no-preference) {
@@ -173,7 +171,7 @@
 <div class="wrap">
   <header id="t-header">
     <h1 class="din">GPS</h1>
-    <span class="tag">Goal → Plan → System · unlock the next version of you, one honest week at a time</span>
+    <span class="tag">Goal → Plan → System · the 12-week operating rhythm</span>
     <div class="actions">
       <button class="btn primary" id="b-add">+ Goal</button>
       <button class="btn" id="b-adjust">Adjust plan</button>
@@ -205,7 +203,7 @@
     <p class="footnote" id="score-note"></p>
   </section>
 
-  <div class="dropzone park" id="parkzone" style="padding:14px">🅿️ Parking lot — drag a goal here to park it, or click to park a new idea</div>
+  <div class="dropzone park" id="parkzone" style="padding:14px"><b>Parking lot</b> — drag a goal here to park it, or click to log a new idea</div>
 
   <p class="credits" id="t-credits">
     Method: the <b>GPS framework</b> by <a href="https://www.youtube.com/watch?v=D_KSR3S6W8I" target="_blank" rel="noopener">Ali Abdaal</a>,
@@ -217,7 +215,6 @@
 </div>
 
 <div id="pop" role="tooltip"></div>
-<canvas id="confetti"></canvas>
 <div id="tour-scrim"></div>
 <div id="tour-card" role="dialog" aria-modal="true">
   <h3 id="tc-title"></h3><p id="tc-text"></p>
@@ -378,7 +375,7 @@ window.GPS_DATA = {
       var shift = st.pct >= 99 ? "margin-left:-2px" : "";
       return '<div class="stop" style="left:' + st.pct + '%;' + shift + '"><span>' + esc(st.label) + '</span></div>';
     }).join("") +
-    '<div class="car" style="left:' + D.route.youPct + '%">🚗<span>DAY ' + D.cycle.day + '</span></div>';
+    '<div class="you" style="left:' + D.route.youPct + '%"><span>DAY ' + D.cycle.day + '</span></div>';
 
   function laneHTML(g) {
     var doneCount = g.milestones.filter(function (m) { return m.done || localDone[m.id]; }).length;
@@ -400,14 +397,14 @@ window.GPS_DATA = {
       '</div></div>' +
       '<div><span class="label mob-label" style="margin-bottom:4px">System</span><div class="sys">' +
         (g.system || []).map(function (s) {
-          return '<div class="card scard"><span class="ico">' + esc(s.ico) + '</span><span><span class="k">' + esc(s.k) + '</span><span class="v">' + esc(s.v) + '</span></span></div>';
+          return '<div class="card scard"><span class="k">' + esc(s.k) + '</span><span class="v">' + esc(s.v) + '</span></div>';
         }).join("") +
-        (D.partner ? "" : '<button class="card scard cta" data-invite><span class="ico">🤝</span><span><span class="k">Add the multiplier</span><span class="v">A weekly report to one person ≈ doubles success</span></span></button>') +
+        (D.partner ? "" : '<button class="card scard cta" data-invite><span class="k">Accountability partner</span><span class="v">A weekly report to one person roughly doubled success rates — add yours</span></button>') +
       '</div></div></div>';
   }
   var slots = "";
   for (var i = D.goals.length; i < D.maxGoals; i++)
-    slots += '<div class="lane" style="margin-bottom:14px"><button class="slotcard" data-add><b>+</b><span>Open goal slot ' + (i + 1) + " of " + D.maxGoals + '</span><span class="label">empty on purpose is allowed</span></button><div></div><div></div></div>';
+    slots += '<div class="lane" style="margin-bottom:14px"><button class="slotcard" data-add><b>+</b><span>Goal slot ' + (i + 1) + " of " + D.maxGoals + '</span><span class="label">intentionally open</span></button><div></div><div></div></div>';
   $("#lanes").innerHTML = D.goals.map(laneHTML).join("") + slots;
 
   var sc = D.scorecard;
@@ -458,27 +455,6 @@ window.GPS_DATA = {
     }, function () { $("#cmd-copied").textContent = "Select + copy manually"; });
   });
 
-  // ---------- confetti ----------
-  var cv = $("#confetti"), cx = cv.getContext("2d"), parts = [], raf = null;
-  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function burst(x, y) {
-    if (reduced) return;
-    cv.width = innerWidth; cv.height = innerHeight;
-    var colors = ["#E8B321", "#2456A6", "#2F7E52", "#DE7A62", "#7FAEF2"];
-    for (var i = 0; i < 36; i++) parts.push({ x: x, y: y, vx: (Math.random() - .5) * 9, vy: -Math.random() * 8 - 2, g: .3, r: Math.random() * 4 + 2, c: colors[i % 5], a: 1 });
-    if (!raf) tick();
-  }
-  function tick() {
-    cx.clearRect(0, 0, cv.width, cv.height);
-    parts = parts.filter(function (p) { return p.a > .05; });
-    parts.forEach(function (p) {
-      p.x += p.vx; p.y += p.vy; p.vy += p.g; p.a *= .96;
-      cx.globalAlpha = p.a; cx.fillStyle = p.c; cx.fillRect(p.x, p.y, p.r, p.r * 1.6);
-    });
-    cx.globalAlpha = 1;
-    raf = parts.length ? requestAnimationFrame(tick) : null;
-  }
-
   // ---------- drag & drop ----------
   var dragData = null;
   document.addEventListener("dragstart", function (e) {
@@ -504,7 +480,7 @@ window.GPS_DATA = {
     var z = e.target.closest(".dropzone"); if (!z || !dragData) return;
     e.preventDefault(); z.classList.remove("over");
     if (z.hasAttribute("data-donezone") && dragData.type === "milestone" && z.getAttribute("data-donezone") === dragData.goal) {
-      markDone(dragData.el, z.getBoundingClientRect());
+      markDone(dragData.el);
     }
     if (z.id === "parkzone" && dragData.type === "goal") {
       var g = D.goals.filter(function (x) { return x.id === dragData.id; })[0];
@@ -513,12 +489,11 @@ window.GPS_DATA = {
     dragData = null;
   });
   // clicking a milestone opens its DETAIL view — nothing changes without an explicit action
-  function markDone(el, rect) {
+  function markDone(el) {
     localDone[el.getAttribute("data-mid")] = true; saveLocal();
     el.classList.add("done"); el.classList.remove("next"); el.setAttribute("draggable", "false");
     el.querySelector(".grip").textContent = "✓";
-    if (rect) burst(rect.left + rect.width / 2, rect.top);
-    showCmd("Nice. Make it official →", "Mark milestone done: " + el.getAttribute("data-mname") + "\nUpdate the goal file, tracking log and refresh the dashboard.");
+    showCmd("Marked on the board — record it", "Mark milestone done: " + el.getAttribute("data-mname") + "\nUpdate the goal file, tracking log and refresh the dashboard.");
   }
   var mileEl = null;
   document.addEventListener("click", function (e) {
@@ -539,7 +514,7 @@ window.GPS_DATA = {
   });
   $("#mile-done").addEventListener("click", function () {
     $("#dlg-mile").close();
-    if (mileEl) markDone(mileEl, mileEl.getBoundingClientRect());
+    if (mileEl) markDone(mileEl);
   });
   $("#mile-undo").addEventListener("click", function () {
     if (mileEl) {
@@ -606,9 +581,9 @@ window.GPS_DATA = {
 
   // ---------- tour ----------
   var TOUR = [
-    { sel: "#t-road", t: "Your 12 weeks, as a road", x: "The car is today. The signposts are your milestone dates. If the blue line stalls, so did you — no interpretation needed." },
+    { sel: "#t-road", t: "Your 12 weeks, as a road", x: "The marker is today. The ticks are your milestone dates. If the blue line stalls, so did you — no interpretation needed." },
     { sel: "#t-cols", t: "G · P · S", x: "Goal (where + why), Plan (the dated route), System (the machine that keeps you moving). Most tools stop at G. The whole method is that all three exist, in writing." },
-    { sel: "#lanes", t: "Cards, not chores", x: "Each goal is one lane. Click any plan card to see its details, adjust it, or mark it done — or drag it onto ✓ for the confetti. Nothing changes until you choose an action." },
+    { sel: "#lanes", t: "Cards, not chores", x: "Each goal is one lane. Click any plan card to see its details, adjust it, or mark it done — or drag it onto the ✓ zone. Nothing changes until you choose an action." },
     { sel: "#t-score", t: "Sunday truth", x: "Scored weekly: shipped or not. Recording progress is the strongest lever in the research (138-study meta-analysis)." },
     { sel: "#parkzone", t: "The shiny-object trap", x: "New ideas are welcome — in the parking lot. Drag a goal here to park it, click to park an idea. Reviewed at week 12, promoted only if it beats what you're doing." },
     { sel: "#t-credits", t: "Standing on giants", x: "The GPS frame is Ali Abdaal's (he credits Alex Hormozi). We pressure-tested every step against the actual research and kept what survives. Open source — share it." }
