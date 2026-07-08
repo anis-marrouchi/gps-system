@@ -1,0 +1,14 @@
+{
+  "user_name": "Sam",
+  "channel": "whatsapp",
+  "whatsapp_jid": "15551234567@s.whatsapp.net",
+  "nudge_time": "08:00",
+  "tone": "firm",
+  "partner": {
+    "name": "Alex",
+    "channel": "whatsapp",
+    "jid_or_handle": "15557654321@s.whatsapp.net",
+    "relationship": "cofounder"
+  },
+  "dashboard_artifact_url": null
+}
