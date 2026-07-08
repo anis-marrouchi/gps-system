@@ -1,0 +1,14 @@
+{
+  "name": "gps-system",
+  "owner": {
+    "name": "Anis Marrouchi",
+    "url": "https://github.com/anis-marrouchi"
+  },
+  "plugins": [
+    {
+      "name": "gps",
+      "source": "./",
+      "description": "Evidence-based goal system: Goal → Plan → System. Daily nudges, weekly scorecards, accountability partner, visual dashboard."
+    }
+  ]
+}

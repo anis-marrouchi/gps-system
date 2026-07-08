@@ -1,0 +1,12 @@
+{
+  "name": "gps",
+  "description": "Evidence-based goal system: Goal → Plan → System (Ali Abdaal's GPS method, science-corrected). Daily nudges, weekly scorecards, accountability partner, visual dashboard.",
+  "version": "0.3.0",
+  "author": {
+    "name": "Anis Marrouchi",
+    "url": "https://github.com/anis-marrouchi"
+  },
+  "homepage": "https://github.com/anis-marrouchi/gps-system",
+  "license": "MIT",
+  "keywords": ["goals", "productivity", "accountability", "habits", "gps-method"]
+}

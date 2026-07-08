@@ -1,8 +1,14 @@
 # GPS System
 
 **An evidence-based goal system run by Claude Code.** Goal → Plan → System, with a
-daily nudge, a weekly scorecard, an accountability partner, and a browser dashboard —
-built on what the research actually supports, not productivity folklore.
+daily nudge, a weekly scorecard, an accountability partner, and a visual card-board
+dashboard — built on what the research actually supports, not productivity folklore.
+
+> **Credit where it's due:** the GPS framework comes from
+> [Ali Abdaal's "Make 2026 the Best Year of Your Life"](https://www.youtube.com/watch?v=D_KSR3S6W8I),
+> who credits the original idea to [Alex Hormozi](https://www.acquisition.com).
+> This project turns it into a running system and pressure-tests every step against
+> the primary research — keeping what survives, fixing what doesn't.
 
 No app to install. Your goals are markdown files; Claude Code runs the rituals; your
 phone gets one short message a day.
@@ -44,8 +50,19 @@ The method: [`method/gps-adapted.md`](method/gps-adapted.md).
 
 ## Quick start
 
+**As a Claude Code plugin (simplest):**
+
+```
+/plugin marketplace add anis-marrouchi/gps-system
+/plugin install gps@gps-system
+```
+
+then type `/gps-onboard` in any project. Your goals live where you run it.
+
+**Self-hosted (full control, scheduled rituals):**
+
 ```bash
-git clone <this-repo> gps-system && cd gps-system
+git clone https://github.com/anis-marrouchi/gps-system && cd gps-system
 cp examples/config.example.json data/config.json   # edit: your name, channel, time
 claude                                              # then type: /gps-onboard
 ./system/install-schedules.sh                       # macOS launchd: daily/weekly/monthly

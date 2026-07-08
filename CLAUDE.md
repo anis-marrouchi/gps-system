@@ -70,6 +70,13 @@ Partner messages use the partner's own `channel` from config, same dispatch rule
 | `/gps-dashboard` | On demand + after reviews | Manual |
 | `/gps-partner` | When inviting/changing an accountability partner | Manual, interactive |
 
+## Plugin layout
+
+The repo doubles as a Claude Code plugin (`.claude-plugin/plugin.json` +
+`marketplace.json`). Canonical skill source is `.claude/skills/`; after editing any
+skill, run `system/sync-plugin.sh` to mirror into `skills/` (the plugin layout) and
+commit both.
+
 ## Message delivery
 
 Send via the channel in `data/config.json`, always prefixed `[GPS]`. One message per

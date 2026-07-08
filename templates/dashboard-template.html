@@ -3,116 +3,126 @@
   :root {
     --ground:#EFF2F1; --panel:#FFFFFF; --panel-edge:#DCE1DF;
     --ink:#1B2226; --ink-soft:#5A6670;
-    --route:#2456A6; --route-soft:#2456A61F; --pos:#E8B321;
+    --route:#2456A6; --route-soft:#2456A61F; --pos:#E8B321; --pos-soft:#E8B32126;
     --good:#2F7E52; --warn:#B07A10; --bad:#B3452F;
-    --track:#D8DDDB; --scrim:#1B222699;
+    --track:#D8DDDB; --scrim:#1B222699; --btn-primary-ink:#FFFFFF;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --ground:#13171C; --panel:#1B2129; --panel-edge:#2A323C;
       --ink:#E6E9E4; --ink-soft:#9AA5AC;
-      --route:#7FAEF2; --route-soft:#7FAEF226; --pos:#F2C230;
+      --route:#7FAEF2; --route-soft:#7FAEF226; --pos:#F2C230; --pos-soft:#F2C23022;
       --good:#57B380; --warn:#D9A63C; --bad:#DE7A62;
-      --track:#2E363F; --scrim:#000000AA;
+      --track:#2E363F; --scrim:#000000AA; --btn-primary-ink:#10151B;
     }
   }
   :root[data-theme="dark"] {
     --ground:#13171C; --panel:#1B2129; --panel-edge:#2A323C;
     --ink:#E6E9E4; --ink-soft:#9AA5AC;
-    --route:#7FAEF2; --route-soft:#7FAEF226; --pos:#F2C230;
+    --route:#7FAEF2; --route-soft:#7FAEF226; --pos:#F2C230; --pos-soft:#F2C23022;
     --good:#57B380; --warn:#D9A63C; --bad:#DE7A62;
-    --track:#2E363F; --scrim:#000000AA;
+    --track:#2E363F; --scrim:#000000AA; --btn-primary-ink:#10151B;
   }
   :root[data-theme="light"] {
     --ground:#EFF2F1; --panel:#FFFFFF; --panel-edge:#DCE1DF;
     --ink:#1B2226; --ink-soft:#5A6670;
-    --route:#2456A6; --route-soft:#2456A61F; --pos:#E8B321;
+    --route:#2456A6; --route-soft:#2456A61F; --pos:#E8B321; --pos-soft:#E8B32126;
     --good:#2F7E52; --warn:#B07A10; --bad:#B3452F;
-    --track:#D8DDDB; --scrim:#1B222699;
+    --track:#D8DDDB; --scrim:#1B222699; --btn-primary-ink:#FFFFFF;
   }
   * { box-sizing: border-box; }
   body {
     background: var(--ground); color: var(--ink);
     font-family: "Avenir Next", -apple-system, "Segoe UI", system-ui, sans-serif;
-    line-height: 1.5; margin: 0; padding: 24px 20px 56px;
+    line-height: 1.45; margin: 0; padding: 24px 20px 56px;
   }
-  .wrap { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+  .wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
   .din { font-family: "DIN Alternate", "Bahnschrift", "Avenir Next Condensed", "Arial Narrow", sans-serif; }
   .label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
   .num { font-variant-numeric: tabular-nums; }
   button { font: inherit; cursor: pointer; }
-  button:focus-visible, .help:focus-visible { outline: 2px solid var(--route); outline-offset: 2px; }
+  button:focus-visible, .help:focus-visible, [draggable]:focus-visible { outline: 2px solid var(--route); outline-offset: 2px; }
 
-  header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
   header h1 { font-size: 30px; margin: 0; letter-spacing: .02em; }
-  header .cycle { color: var(--ink-soft); font-size: 14px; margin-right: auto; }
+  header .tag { color: var(--ink-soft); font-size: 14px; margin-right: auto; }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-  .btn {
-    border: 1px solid var(--panel-edge); background: var(--panel); color: var(--ink);
-    border-radius: 5px; padding: 8px 14px; font-size: 14px; font-weight: 600;
-  }
-  .btn.primary { background: var(--route); border-color: var(--route); color: #fff; }
-  :root[data-theme="dark"] .btn.primary, .btn.primary { color: #fff; }
-  @media (prefers-color-scheme: dark) { .btn.primary { color: #10151B; } }
-  :root[data-theme="dark"] .btn.primary { color: #10151B; }
-  :root[data-theme="light"] .btn.primary { color: #fff; }
+  .btn { border: 1px solid var(--panel-edge); background: var(--panel); color: var(--ink); border-radius: 5px; padding: 8px 14px; font-size: 14px; font-weight: 600; }
+  .btn.primary { background: var(--route); border-color: var(--route); color: var(--btn-primary-ink); }
   .btn:hover { filter: brightness(1.06); }
 
-  .card { background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 6px; padding: 18px 20px; }
-  .card-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
-  .card-head h2 { font-size: 20px; margin: 0; letter-spacing: .02em; }
-  .card-head .spacer { margin-left: auto; }
-
-  .help {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ink-soft);
-    color: var(--ink-soft); background: none; font-size: 11px; font-weight: 700;
-    padding: 0; vertical-align: 2px; flex: none;
-  }
+  .card { background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 8px; padding: 16px 18px; }
+  .help { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ink-soft); color: var(--ink-soft); background: none; font-size: 11px; font-weight: 700; padding: 0; flex: none; }
   .help:hover { color: var(--route); border-color: var(--route); }
-  #pop {
-    position: absolute; z-index: 60; max-width: 320px; background: var(--panel);
-    border: 1px solid var(--panel-edge); border-radius: 6px; padding: 12px 14px;
-    box-shadow: 0 8px 28px #0003; font-size: 13.5px; display: none;
-  }
-  #pop b { display: block; margin-bottom: 4px; font-size: 13px; }
+  #pop { position: absolute; z-index: 60; max-width: 330px; background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 6px; padding: 12px 14px; box-shadow: 0 8px 28px #0003; font-size: 13.5px; display: none; }
+  #pop b { display: block; margin-bottom: 4px; }
   #pop .src { color: var(--ink-soft); font-size: 12px; margin-top: 6px; display: block; }
+  #pop a { color: var(--route); }
 
-  .hud-stats { display: flex; flex-wrap: wrap; gap: 8px 36px; margin-bottom: 16px; }
+  /* ---- road hero ---- */
+  .hud-stats { display: flex; flex-wrap: wrap; gap: 8px 34px; margin-bottom: 18px; }
   .stat .label { display: block; margin-bottom: 2px; }
-  .stat .v { font-size: 26px; line-height: 1.1; }
+  .stat .v { font-size: 25px; line-height: 1.1; }
   .stat .v small { font-size: 14px; color: var(--ink-soft); font-weight: 400; }
-  .route { position: relative; height: 42px; }
-  .route .bed { position: absolute; inset: 17px 0 auto 0; height: 6px; background: var(--track); border-radius: 3px; }
-  .route .done { position: absolute; left: 0; top: 17px; height: 6px; background: var(--route); border-radius: 3px 0 0 3px; }
-  .route .stop { position: absolute; top: 14px; width: 2px; height: 12px; background: var(--ink-soft); }
-  .route .stop span { position: absolute; top: 15px; left: -23px; width: 48px; text-align: center; font-size: 10px; color: var(--ink-soft); white-space: nowrap; }
-  .route .you { position: absolute; top: 9px; width: 14px; height: 14px; margin-left: -7px; background: var(--pos); border-radius: 50%; border: 3px solid var(--panel); box-shadow: 0 0 0 1px var(--panel-edge); }
-  .route .you span { position: absolute; bottom: 17px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+  .road { position: relative; height: 54px; }
+  .road .bed { position: absolute; inset: 26px 0 auto 0; height: 8px; background: var(--track); border-radius: 4px; }
+  .road .bed::after { content: ""; position: absolute; inset: 3px 0; background: repeating-linear-gradient(90deg, var(--panel) 0 14px, transparent 14px 30px); opacity: .8; height: 2px; }
+  .road .done { position: absolute; left: 0; top: 26px; height: 8px; background: var(--route); border-radius: 4px 0 0 4px; }
+  .road .stop { position: absolute; top: 21px; width: 2px; height: 18px; background: var(--ink-soft); }
+  .road .stop span { position: absolute; top: 20px; left: -23px; width: 48px; text-align: center; font-size: 10px; color: var(--ink-soft); white-space: nowrap; }
+  .road .car { position: absolute; top: 6px; font-size: 22px; transform: translateX(-50%) scaleX(-1); filter: drop-shadow(0 2px 2px #0003); }
+  .road .car span { position: absolute; top: -14px; left: 50%; transform: translateX(-50%) scaleX(-1); font-size: 10px; font-weight: 700; letter-spacing: .08em; font-family: inherit; }
 
-  .goals { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-  .goal { display: flex; flex-direction: column; gap: 12px; }
-  .pill { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 3px; white-space: nowrap; }
+  /* ---- GPS board ---- */
+  .board-head { display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 14px; }
+  .colhead { display: flex; align-items: baseline; gap: 10px; }
+  .colhead .big { font-size: 34px; line-height: 1; color: var(--route); }
+  .colhead h2 { font-size: 15px; margin: 0; }
+  .colhead small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 12.5px; }
+  .lane { display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 760px) { .board-head { display: none; } .lane { grid-template-columns: 1fr; } .mob-label { display: block !important; } }
+  .mob-label { display: none; }
+
+  .gcard { border-left: 4px solid var(--route); display: flex; flex-direction: column; gap: 8px; cursor: grab; }
+  .gcard:active { cursor: grabbing; }
+  .gcard .top { display: flex; gap: 8px; align-items: baseline; }
+  .gcard h3 { margin: 0; font-size: 17px; }
+  .gcard .spacer { margin-left: auto; }
+  .pill { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; white-space: nowrap; }
   .tone-good { color: var(--good); background: color-mix(in srgb, var(--good) 12%, transparent); }
   .tone-warn { color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, transparent); }
   .tone-bad  { color: var(--bad);  background: color-mix(in srgb, var(--bad) 12%, transparent); }
-  .metric { font-size: 15px; }
-  .metric b { font-size: 22px; }
-  .next { background: var(--route-soft); border-radius: 4px; padding: 9px 12px; font-size: 14px; }
-  .next .label { color: var(--route); margin-bottom: 1px; display: block; }
-  ol.miles { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
-  ol.miles li { display: flex; gap: 10px; align-items: baseline; }
-  ol.miles li.done { color: var(--ink-soft); text-decoration: line-through; }
-  ol.miles .m { color: var(--ink-soft); font-size: 12px; min-width: 24px; }
-  ol.miles .due { margin-left: auto; color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
-  .slot {
-    border: 1.5px dashed var(--panel-edge); border-radius: 6px; display: flex;
-    align-items: center; justify-content: center; min-height: 180px; color: var(--ink-soft);
-    background: none; flex-direction: column; gap: 6px; font-size: 14px;
-  }
-  .slot:hover { border-color: var(--route); color: var(--route); }
-  .slot b { font-size: 22px; font-weight: 400; }
+  .gcard .why { font-size: 12.5px; color: var(--ink-soft); font-style: italic; }
+  .gcard .metric b { font-size: 21px; }
 
+  .plan { display: flex; flex-direction: column; gap: 8px; }
+  .mcard { display: flex; gap: 10px; align-items: center; padding: 10px 12px; font-size: 13.5px; cursor: grab; }
+  .mcard:active { cursor: grabbing; }
+  .mcard.dragging { opacity: .45; }
+  .mcard .grip { color: var(--track); font-size: 14px; letter-spacing: -1px; flex: none; }
+  .mcard .due { margin-left: auto; color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
+  .mcard.done { border-color: color-mix(in srgb, var(--good) 40%, var(--panel-edge)); color: var(--ink-soft); }
+  .mcard.done .txt { text-decoration: line-through; }
+  .mcard.done .grip { color: var(--good); }
+  .mcard.next { border-color: var(--pos); background: var(--pos-soft); }
+  .mcard.next .nowtag { font-size: 10px; font-weight: 700; letter-spacing: .09em; color: var(--warn); }
+  .dropzone { border: 1.5px dashed var(--panel-edge); border-radius: 8px; padding: 9px 12px; text-align: center; font-size: 12.5px; color: var(--ink-soft); transition: border-color .15s, background .15s; }
+  .dropzone.over { border-color: var(--good); background: color-mix(in srgb, var(--good) 8%, transparent); color: var(--good); }
+  .dropzone.park.over { border-color: var(--warn); background: color-mix(in srgb, var(--warn) 8%, transparent); color: var(--warn); }
+
+  .sys { display: flex; flex-direction: column; gap: 8px; }
+  .scard { display: flex; gap: 10px; align-items: center; padding: 10px 12px; font-size: 13px; }
+  .scard .ico { font-size: 16px; flex: none; }
+  .scard .k { font-weight: 600; display: block; font-size: 12px; }
+  .scard .v { color: var(--ink-soft); }
+  .scard.cta { border-style: dashed; cursor: pointer; background: none; width: 100%; text-align: left; }
+  .scard.cta:hover { border-color: var(--route); }
+
+  .slotcard { border: 1.5px dashed var(--panel-edge); border-radius: 8px; min-height: 92px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: var(--ink-soft); background: none; font-size: 13.5px; width: 100%; }
+  .slotcard:hover { border-color: var(--route); color: var(--route); }
+  .slotcard b { font-size: 20px; font-weight: 400; }
+
+  /* scorecard */
   .scroller { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-size: 13px; }
   th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--panel-edge); white-space: nowrap; }
@@ -121,50 +131,37 @@
   tr.now td { background: var(--route-soft); }
   .zone { font-size: 11px; color: var(--warn); font-weight: 600; }
   .footnote { font-size: 12px; color: var(--ink-soft); margin: 8px 0 0; }
+  .card-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+  .card-head h2 { font-size: 19px; margin: 0; }
+  .card-head .spacer { margin-left: auto; }
 
-  .row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-  ul.plain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
-  ul.plain li { display: flex; justify-content: space-between; gap: 12px; }
-  .st { font-weight: 600; }
-  .st.good { color: var(--good); } .st.warn { color: var(--warn); } .st.bad { color: var(--bad); }
+  .credits { font-size: 12.5px; color: var(--ink-soft); text-align: center; line-height: 1.7; }
+  .credits a { color: var(--route); }
 
-  dialog {
-    border: 1px solid var(--panel-edge); border-radius: 8px; background: var(--panel);
-    color: var(--ink); padding: 22px; max-width: 440px; width: calc(100% - 40px);
-  }
+  dialog { border: 1px solid var(--panel-edge); border-radius: 8px; background: var(--panel); color: var(--ink); padding: 22px; max-width: 440px; width: calc(100% - 40px); }
   dialog::backdrop { background: var(--scrim); }
   dialog h3 { margin: 0 0 4px; font-size: 19px; }
   dialog .sub { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
   dialog form { display: flex; flex-direction: column; gap: 10px; }
   dialog label { font-size: 13px; font-weight: 600; display: flex; flex-direction: column; gap: 4px; }
-  dialog input, dialog select, dialog textarea {
-    font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--panel-edge);
-    border-radius: 5px; background: var(--ground); color: var(--ink); width: 100%;
-  }
+  dialog input, dialog select, dialog textarea { font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--panel-edge); border-radius: 5px; background: var(--ground); color: var(--ink); width: 100%; }
   dialog textarea { resize: vertical; min-height: 60px; }
-  .dlg-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; }
+  .dlg-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; align-items: center; }
   .steps123 { display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; margin: 4px 0; }
   .steps123 span b { color: var(--route); margin-right: 6px; }
-  .cmdbox {
-    background: var(--ground); border: 1px solid var(--panel-edge); border-radius: 5px;
-    padding: 10px 12px; font-family: "SF Mono", Menlo, monospace; font-size: 12px;
-    white-space: pre-wrap; word-break: break-word; max-height: 160px; overflow-y: auto;
-  }
+  .cmdbox { background: var(--ground); border: 1px solid var(--panel-edge); border-radius: 5px; padding: 10px 12px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; white-space: pre-wrap; word-break: break-word; max-height: 160px; overflow-y: auto; }
   .copied { color: var(--good); font-size: 13px; font-weight: 600; }
   .evidence { background: var(--route-soft); border-radius: 5px; padding: 9px 12px; font-size: 12.5px; }
 
   #tour-scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 80; display: none; }
-  #tour-card {
-    position: fixed; z-index: 90; background: var(--panel); border: 1px solid var(--panel-edge);
-    border-radius: 8px; padding: 18px 20px; max-width: 340px; width: calc(100% - 48px);
-    box-shadow: 0 12px 40px #0005; display: none;
-  }
+  #tour-card { position: fixed; z-index: 90; background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 8px; padding: 18px 20px; max-width: 340px; width: calc(100% - 48px); box-shadow: 0 12px 40px #0005; display: none; }
   #tour-card h3 { margin: 0 0 6px; font-size: 17px; }
   #tour-card p { margin: 0 0 14px; font-size: 14px; }
-  #tour-card .dlg-actions { justify-content: space-between; align-items: center; }
+  #tour-card .dlg-actions { justify-content: space-between; }
   #tour-card .prog { color: var(--ink-soft); font-size: 12px; }
-  .tour-spot { position: relative; z-index: 85; box-shadow: 0 0 0 4px var(--pos), 0 0 0 9999px var(--scrim) !important; border-radius: 6px; }
+  .tour-spot { position: relative; z-index: 85; box-shadow: 0 0 0 4px var(--pos), 0 0 0 9999px var(--scrim) !important; border-radius: 8px; }
 
+  #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
   footer { color: var(--ink-soft); font-size: 12px; text-align: center; }
   footer code { font-family: "SF Mono", Menlo, monospace; font-size: 11px; }
   @media (prefers-reduced-motion: no-preference) {
@@ -176,7 +173,7 @@
 <div class="wrap">
   <header id="t-header">
     <h1 class="din">GPS</h1>
-    <span class="cycle num" id="cycle-line"></span>
+    <span class="tag">Goal → Plan → System · unlock the next version of you, one honest week at a time</span>
     <div class="actions">
       <button class="btn primary" id="b-add">+ Goal</button>
       <button class="btn" id="b-adjust">Adjust plan</button>
@@ -185,12 +182,18 @@
     </div>
   </header>
 
-  <section class="card" id="t-hud">
+  <section class="card" id="t-road">
     <div class="hud-stats num" id="hud-stats"></div>
-    <div class="route num" id="route" aria-label="Cycle progress"></div>
+    <div class="road num" id="road" aria-label="Cycle progress"></div>
   </section>
 
-  <section class="goals" id="goals"></section>
+  <div class="board-head" id="t-cols">
+    <div class="colhead"><span class="big din">G</span><h2>Goal <button class="help" data-help="G" aria-label="What makes a good goal?">?</button><small>the destination — and why it matters</small></h2></div>
+    <div class="colhead"><span class="big din">P</span><h2>Plan <button class="help" data-help="P" aria-label="What makes a good plan?">?</button><small>the route — drag a step onto ✓ when it's done</small></h2></div>
+    <div class="colhead"><span class="big din">S</span><h2>System <button class="help" data-help="S" aria-label="What is a system?">?</button><small>what keeps you moving when motivation doesn't</small></h2></div>
+  </div>
+
+  <div id="lanes"></div>
 
   <section class="card" id="t-score">
     <div class="card-head">
@@ -202,37 +205,25 @@
     <p class="footnote" id="score-note"></p>
   </section>
 
-  <section class="row2">
-    <div class="card" id="t-anti">
-      <div class="card-head">
-        <h2 class="din">Anti-goals</h2>
-        <button class="help" data-help="anti" aria-label="What are anti-goals?">?</button>
-        <span class="spacer"></span><span class="label">Override progress</span>
-      </div>
-      <ul class="plain num" id="anti-list"></ul>
-    </div>
-    <div class="card" id="t-partner">
-      <div class="card-head">
-        <h2 class="din">Accountability</h2>
-        <button class="help" data-help="partner" aria-label="Why a partner?">?</button>
-      </div>
-      <div id="partner-body"></div>
-    </div>
-  </section>
+  <div class="dropzone park" id="parkzone" style="padding:14px">🅿️ Parking lot — drag a goal here to park it, or click to park a new idea</div>
 
+  <p class="credits" id="t-credits">
+    Method: the <b>GPS framework</b> by <a href="https://www.youtube.com/watch?v=D_KSR3S6W8I" target="_blank" rel="noopener">Ali Abdaal</a>,
+    who credits it to <a href="https://www.acquisition.com" target="_blank" rel="noopener">Alex Hormozi</a> —
+    pressure-tested here against Locke &amp; Latham, Gollwitzer, Oettingen (WOOP), Matthews, and Harkin et&nbsp;al.
+    <br>Open source (MIT): <a href="https://github.com/anis-marrouchi/gps-system" target="_blank" rel="noopener">github.com/anis-marrouchi/gps-system</a>
+  </p>
   <footer id="foot"></footer>
 </div>
 
 <div id="pop" role="tooltip"></div>
+<canvas id="confetti"></canvas>
 <div id="tour-scrim"></div>
 <div id="tour-card" role="dialog" aria-modal="true">
   <h3 id="tc-title"></h3><p id="tc-text"></p>
   <div class="dlg-actions">
     <span class="prog" id="tc-prog"></span>
-    <span>
-      <button class="btn" id="tc-skip">Skip</button>
-      <button class="btn primary" id="tc-next">Next</button>
-    </span>
+    <span><button class="btn" id="tc-skip">Skip</button> <button class="btn primary" id="tc-next">Next</button></span>
   </div>
 </div>
 
@@ -243,7 +234,7 @@
     <label>What's the goal? <input name="what" required placeholder="e.g. Publish 8 essays"></label>
     <label>How will you measure it? <input name="metric" required placeholder="e.g. essays published — 8 by Sep 29"></label>
     <label>Why does it matter to you? <input name="why" required placeholder="one honest sentence"></label>
-    <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary" id="add-go">Continue</button></div>
+    <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary">Continue</button></div>
   </form>
 </dialog>
 
@@ -272,10 +263,19 @@
   <form method="dialog" id="f-partner" style="margin-top:10px">
     <label>Their name <input name="name" required placeholder="e.g. Alex"></label>
     <label>Where do they get the report?
-      <select name="channel"><option>WhatsApp</option><option>Telegram</option><option>Email</option></select>
+      <select name="channel"><option>Email</option><option>WhatsApp</option><option>Telegram</option></select>
     </label>
-    <label>Number / handle / address <input name="handle" required placeholder="+216… / @alex / alex@mail.com"></label>
+    <label>Address / number / handle <input name="handle" required placeholder="alex@mail.com / +216… / @alex"></label>
     <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary">Continue</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-park">
+  <h3>Park an idea</h3>
+  <p class="sub">Shiny things go here, not into your goals. Reviewed at the week-12 reset.</p>
+  <form method="dialog" id="f-park">
+    <label>The idea <input name="idea" required placeholder="one line"></label>
+    <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary">Park it</button></div>
   </form>
 </dialog>
 
@@ -285,7 +285,7 @@
     <span><b>1</b>Copy this</span>
     <div class="cmdbox" id="cmd-text"></div>
     <span><b>2</b>Open Claude Code in your <code>gps-system</code> folder</span>
-    <span><b>3</b>Paste. Claude walks you through the rest.</span>
+    <span><b>3</b>Paste. Claude handles the rest.</span>
   </div>
   <div class="dlg-actions">
     <span class="copied" id="cmd-copied"></span>
@@ -301,22 +301,26 @@ window.GPS_DATA = {
   "cycle": { "name": "2026-Q3", "start": "Jul 8", "end": "Sep 29", "day": 1, "totalDays": 84 },
   "stats": [
     { "label": "Day", "value": "1", "sub": "/ 84" },
-    { "label": "G1 progress", "value": "0", "sub": "/ 8" },
-    { "label": "Late nights (wk)", "value": "0", "tone": "good" },
+    { "label": "Streak", "value": "0", "sub": "days clean" },
     { "label": "Parked ideas", "value": "0" }
   ],
   "route": { "donePct": 1.2, "youPct": 1.2, "stops": [
     { "pct": 10.7, "label": "M1" }, { "pct": 39.3, "label": "M2" },
     { "pct": 72.6, "label": "M3" }, { "pct": 100, "label": "Sep 29" } ] },
   "goals": [
-    { "id": "g1", "title": "G1 · Publish weekly", "pill": { "text": "On track", "tone": "good" },
-      "metric": "0/8", "metricNote": "essays published · learning goal",
-      "next": "Write the 12-topic list + draft essay #1",
+    { "id": "g1", "title": "Publish weekly", "pill": { "text": "On track", "tone": "good" },
+      "metric": "0/8", "metricNote": "essays published",
+      "why": "I'm a person who publishes, not a person who drafts.",
       "milestones": [
-        { "m": "M1", "text": "Topics list + essay #1 published", "due": "Jul 17", "done": false },
-        { "m": "M2", "text": "3 essays published", "due": "Aug 10", "done": false },
-        { "m": "M3", "text": "6 essays published", "due": "Sep 7", "done": false },
-        { "m": "M4", "text": "8 published + what-worked note", "due": "Sep 29", "done": false } ] }
+        { "id": "g1m1", "m": "M1", "text": "Topics list + essay #1 published", "due": "Jul 17", "done": false, "next": true },
+        { "id": "g1m2", "m": "M2", "text": "3 essays published", "due": "Aug 10", "done": false },
+        { "id": "g1m3", "m": "M3", "text": "6 essays published", "due": "Sep 7", "done": false },
+        { "id": "g1m4", "m": "M4", "text": "8 published + what-worked note", "due": "Sep 29", "done": false } ],
+      "system": [
+        { "ico": "📈", "k": "Tracking", "v": "words written, logged daily" },
+        { "ico": "⏰", "k": "Reminder", "v": "08:00 nudge with today's one action" },
+        { "ico": "🛡️", "k": "If-thens armed", "v": "3 — crunch, perfectionism, novelty fade" },
+        { "ico": "🤝", "k": "Accountability", "v": "Sunday scorecard" } ] }
   ],
   "maxGoals": 3,
   "scorecard": {
@@ -336,9 +340,6 @@ window.GPS_DATA = {
       { "cells": ["W12", "Sep 27", "—", "—", "—"] } ]
   },
   "scoreNote": "Weeks 4–6 are the statistical drift zone — reviews there get extra scrutiny.",
-  "anti": [
-    { "text": "Bed by 00:30 (≥5 nights/wk)", "status": "Clean", "tone": "good" },
-    { "text": "No new projects mid-cycle", "status": "None — parking lot: 0", "tone": "good" } ],
   "partner": null
 };
 /*GPS_DATA_END*/
@@ -347,64 +348,70 @@ window.GPS_DATA = {
 (function () {
   var D = window.GPS_DATA, $ = function (s) { return document.querySelector(s); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); };
+  var localDone = {};
+  try { localDone = JSON.parse(localStorage.getItem("gps-local-done") || "{}"); } catch (e) {}
 
-  $("#cycle-line").textContent = "Cycle " + D.cycle.name + " · " + D.cycle.start + " → " + D.cycle.end;
   document.title = "GPS — " + D.cycle.name;
+  $("#hud-stats").innerHTML = '<div class="stat"><span class="label">Cycle</span><span class="v din">' + esc(D.cycle.name) + '<small> ' + esc(D.cycle.start) + " → " + esc(D.cycle.end) + '</small></span></div>' +
+    D.stats.map(function (s) {
+      var col = s.tone === "bad" ? "var(--bad)" : s.tone === "warn" ? "var(--warn)" : "inherit";
+      return '<div class="stat"><span class="label">' + esc(s.label) + '</span><span class="v din" style="color:' + col + '">' + esc(s.value) + (s.sub ? '<small> ' + esc(s.sub) + '</small>' : '') + '</span></div>';
+    }).join("");
 
-  $("#hud-stats").innerHTML = D.stats.map(function (s) {
-    var col = s.tone === "bad" ? "var(--bad)" : s.tone === "warn" ? "var(--warn)" : "inherit";
-    return '<div class="stat"><span class="label">' + esc(s.label) + '</span><span class="v din" style="color:' + col + '">' + esc(s.value) + (s.sub ? '<small> ' + esc(s.sub) + '</small>' : '') + '</span></div>';
-  }).join("");
-
-  $("#route").innerHTML = '<div class="bed"></div><div class="done" style="width:' + D.route.donePct + '%"></div>' +
+  $("#road").innerHTML = '<div class="bed"></div><div class="done" style="width:' + D.route.donePct + '%"></div>' +
     D.route.stops.map(function (st) {
       var shift = st.pct >= 99 ? "margin-left:-2px" : "";
       return '<div class="stop" style="left:' + st.pct + '%;' + shift + '"><span>' + esc(st.label) + '</span></div>';
     }).join("") +
-    '<div class="you" style="left:' + D.route.youPct + '%"><span>YOU · day ' + D.cycle.day + '</span></div>';
+    '<div class="car" style="left:' + D.route.youPct + '%">🚗<span>DAY ' + D.cycle.day + '</span></div>';
 
-  var goalCard = function (g) {
-    return '<div class="card goal" data-goal="' + esc(g.id) + '"><div class="card-head"><h2 class="din">' + esc(g.title) + '</h2>' +
-      '<button class="help" data-help="goal" aria-label="How goals work">?</button><span class="spacer"></span>' +
-      '<span class="pill tone-' + esc(g.pill.tone) + '">' + esc(g.pill.text) + '</span></div>' +
-      '<div class="metric num"><b class="din">' + esc(g.metric) + '</b> ' + esc(g.metricNote) + '</div>' +
-      '<div class="next"><span class="label">Next</span>' + esc(g.next) + '</div>' +
-      '<ol class="miles num">' + g.milestones.map(function (m) {
-        return '<li class="' + (m.done ? "done" : "") + '"><span class="m">' + esc(m.m) + '</span> ' + esc(m.text) + ' <span class="due">' + esc(m.due) + '</span></li>';
-      }).join("") + '</ol></div>';
-  };
+  function laneHTML(g) {
+    var doneCount = g.milestones.filter(function (m) { return m.done || localDone[m.id]; }).length;
+    return '<div class="lane" data-goal="' + esc(g.id) + '" style="margin-bottom:14px">' +
+      '<div><span class="label mob-label" style="margin-bottom:4px">Goal</span>' +
+      '<div class="card gcard" draggable="true" data-drag-goal="' + esc(g.id) + '" tabindex="0">' +
+        '<div class="top"><h3 class="din">' + esc(g.title) + '</h3><span class="spacer"></span><span class="pill tone-' + esc(g.pill.tone) + '">' + esc(g.pill.text) + '</span></div>' +
+        '<div class="metric num"><b class="din">' + esc(g.metric) + '</b> <span style="color:var(--ink-soft)">' + esc(g.metricNote) + '</span></div>' +
+        '<div class="why">“' + esc(g.why || "") + '”</div>' +
+      '</div></div>' +
+      '<div><span class="label mob-label" style="margin-bottom:4px">Plan</span><div class="plan">' +
+        '<div class="dropzone" data-donezone="' + esc(g.id) + '">✓ Drop a step here when it\'s done (' + doneCount + '/' + g.milestones.length + ')</div>' +
+        g.milestones.map(function (m) {
+          var isDone = m.done || localDone[m.id];
+          var cls = "card mcard" + (isDone ? " done" : (m.next ? " next" : ""));
+          return '<div class="' + cls + '" draggable="' + (!isDone) + '" data-mid="' + esc(m.id) + '" data-goal="' + esc(g.id) + '" data-mname="' + esc(g.title) + " · " + esc(m.m) + '" tabindex="0">' +
+            '<span class="grip">' + (isDone ? "✓" : "⋮⋮") + '</span><span class="txt"><b>' + esc(m.m) + '</b> ' + esc(m.text) + (m.next && !isDone ? ' <span class="nowtag">← YOU ARE HERE</span>' : "") + '</span><span class="due">' + esc(m.due) + '</span></div>';
+        }).join("") +
+      '</div></div>' +
+      '<div><span class="label mob-label" style="margin-bottom:4px">System</span><div class="sys">' +
+        (g.system || []).map(function (s) {
+          return '<div class="card scard"><span class="ico">' + esc(s.ico) + '</span><span><span class="k">' + esc(s.k) + '</span><span class="v">' + esc(s.v) + '</span></span></div>';
+        }).join("") +
+        (D.partner ? "" : '<button class="card scard cta" data-invite><span class="ico">🤝</span><span><span class="k">Add the multiplier</span><span class="v">A weekly report to one person ≈ doubles success</span></span></button>') +
+      '</div></div></div>';
+  }
   var slots = "";
   for (var i = D.goals.length; i < D.maxGoals; i++)
-    slots += '<button class="slot" data-add><b>+</b><span>Open goal slot ' + (i + 1) + ' of ' + D.maxGoals + '</span><span class="label">empty on purpose is allowed</span></button>';
-  $("#goals").innerHTML = D.goals.map(goalCard).join("") + slots;
+    slots += '<div class="lane" style="margin-bottom:14px"><button class="slotcard" data-add><b>+</b><span>Open goal slot ' + (i + 1) + " of " + D.maxGoals + '</span><span class="label">empty on purpose is allowed</span></button><div></div><div></div></div>';
+  $("#lanes").innerHTML = D.goals.map(laneHTML).join("") + slots;
 
   var sc = D.scorecard;
   $("#score-table").innerHTML = "<thead><tr>" + sc.columns.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>" +
     sc.rows.map(function (r) {
-      var cls = (r.now ? "now" : "");
-      return '<tr class="' + cls + '">' + r.cells.map(function (c, idx) {
+      return '<tr class="' + (r.now ? "now" : "") + '">' + r.cells.map(function (c, idx) {
         var label = (idx === 0 && r.drift) ? esc(c) + ' <span class="zone">drift zone</span>' : esc(c);
         return '<td class="' + (c === "—" ? "empty" : "") + '">' + label + "</td>";
       }).join("") + "</tr>";
     }).join("") + "</tbody>";
   $("#score-note").textContent = D.scoreNote || "";
-
-  $("#anti-list").innerHTML = D.anti.map(function (a) {
-    return "<li>" + esc(a.text) + ' <span class="st ' + esc(a.tone) + '">' + esc(a.status) + "</span></li>";
-  }).join("");
-
-  $("#partner-body").innerHTML = D.partner
-    ? '<p style="font-size:14px;margin:0">Weekly report goes to <b>' + esc(D.partner.name) + '</b> after your approval each Sunday.</p>'
-    : '<p style="font-size:14px;margin:0 0 10px">You\'re flying solo. It works — but sending your weekly scorecard to one person roughly <b>doubled</b> success rates in the research.</p><button class="btn primary" data-invite>Invite someone</button>';
-
   $("#foot").innerHTML = "Snapshot " + esc(D.generated) + ' · refresh: <code>/gps-dashboard</code> in Claude Code · self-hosted, your data stays yours';
 
-  // ---------- help popovers ----------
+  // ---------- help ----------
   var HELP = {
-    goal: { t: "How goals work here", x: "Each goal has one metric, dated milestones, and if-then plans for the obstacles most likely to kill it. Max 3 per 12-week cycle — the cap is the feature.", s: "Locke & Latham; Gollwitzer (if-then plans, d≈0.65)" },
-    scorecard: { t: "The weekly scorecard", x: "Every Sunday the week gets scored per goal — shipped or not, numbers not vibes. Recording progress is the single strongest lever the research has found.", s: "Harkin et al. 2016 — meta-analysis of 138 studies" },
-    anti: { t: "Anti-goals", x: "Lines you refuse to cross while chasing goals (sleep, family, focus). Hitting a goal by violating one counts as a miss — that's the guardrail against tunnel vision.", s: "Ordóñez et al., \"Goals Gone Wild\" (HBS)" },
-    partner: { t: "Why a partner?", x: "A weekly progress report to a real person roughly doubled goal success. (The famous \"Harvard goals study\" never existed — this is the real one.) Your partner gets one message a week, only after you approve it.", s: "Matthews, Dominican University; Harkin et al. 2016" }
+    G: { t: "G — the destination", x: "One measurable outcome, an honest why, and anti-goals (lines you won't cross to get there). Vague goals like \"get fit\" get rejected at onboarding.", s: "Locke & Latham (specificity); Bryan et al. (identity)" },
+    P: { t: "P — the route", x: "3–5 dated milestones, sanity-checked twice: does it make sense, and — knowing yourself — will you actually do it? Under 80% confidence → shrink it. The highlighted card is your current step.", s: "The 80% checks are Abdaal's; the pre-mortem is Oettingen's WOOP" },
+    S: { t: "S — the machine", x: "This is the part most people never define: WHAT gets tracked, WHEN you're reminded, WHICH if-then plans are armed for your known obstacles, and WHO sees your weekly report. If you can't point at these four, you don't have a system yet — you have a wish.", s: "Harkin et al. 2016 (tracking); Gollwitzer (if-thens); Matthews (accountability)" },
+    scorecard: { t: "The weekly scorecard", x: "Every Sunday the week gets scored per goal — shipped or not, numbers not vibes. Recording progress is the single strongest lever the research has found.", s: "Harkin et al. 2016 — meta-analysis, 138 studies" }
   };
   var pop = $("#pop");
   document.addEventListener("click", function (e) {
@@ -414,17 +421,17 @@ window.GPS_DATA = {
       pop.innerHTML = "<b>" + esc(k.t) + "</b>" + esc(k.x) + '<span class="src">' + esc(k.s) + "</span>";
       pop.style.display = "block";
       var r = h.getBoundingClientRect();
-      var left = Math.min(r.left + window.scrollX, window.scrollX + document.documentElement.clientWidth - 340);
-      pop.style.top = (r.bottom + window.scrollY + 8) + "px";
-      pop.style.left = Math.max(12, left) + "px";
+      pop.style.top = (r.bottom + scrollY + 8) + "px";
+      pop.style.left = Math.max(12, Math.min(r.left + scrollX, scrollX + document.documentElement.clientWidth - 350)) + "px";
       e.stopPropagation(); return;
     }
     if (!e.target.closest("#pop")) pop.style.display = "none";
   });
 
-  // ---------- action modals ----------
+  // ---------- command modal ----------
   var cmdDlg = $("#dlg-cmd");
-  function showCmd(text) {
+  function showCmd(title, text) {
+    $("#cmd-title").textContent = title;
     $("#cmd-text").textContent = text;
     $("#cmd-copied").textContent = "";
     cmdDlg.showModal();
@@ -433,20 +440,87 @@ window.GPS_DATA = {
     var t = $("#cmd-text").textContent;
     (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
       $("#cmd-copied").textContent = "Copied ✓";
-    }, function () {
-      var range = document.createRange(); range.selectNodeContents($("#cmd-text"));
-      var sel = getSelection(); sel.removeAllRanges(); sel.addRange(range);
-      $("#cmd-copied").textContent = "Select + copy manually";
-    });
+    }, function () { $("#cmd-copied").textContent = "Select + copy manually"; });
   });
 
+  // ---------- confetti ----------
+  var cv = $("#confetti"), cx = cv.getContext("2d"), parts = [], raf = null;
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function burst(x, y) {
+    if (reduced) return;
+    cv.width = innerWidth; cv.height = innerHeight;
+    var colors = ["#E8B321", "#2456A6", "#2F7E52", "#DE7A62", "#7FAEF2"];
+    for (var i = 0; i < 36; i++) parts.push({ x: x, y: y, vx: (Math.random() - .5) * 9, vy: -Math.random() * 8 - 2, g: .3, r: Math.random() * 4 + 2, c: colors[i % 5], a: 1 });
+    if (!raf) tick();
+  }
+  function tick() {
+    cx.clearRect(0, 0, cv.width, cv.height);
+    parts = parts.filter(function (p) { return p.a > .05; });
+    parts.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; p.vy += p.g; p.a *= .96;
+      cx.globalAlpha = p.a; cx.fillStyle = p.c; cx.fillRect(p.x, p.y, p.r, p.r * 1.6);
+    });
+    cx.globalAlpha = 1;
+    raf = parts.length ? requestAnimationFrame(tick) : null;
+  }
+
+  // ---------- drag & drop ----------
+  var dragData = null;
+  document.addEventListener("dragstart", function (e) {
+    var m = e.target.closest("[data-mid]");
+    var g = e.target.closest("[data-drag-goal]");
+    if (m && m.getAttribute("draggable") === "true") {
+      dragData = { type: "milestone", id: m.getAttribute("data-mid"), name: m.getAttribute("data-mname"), goal: m.getAttribute("data-goal"), el: m };
+      m.classList.add("dragging");
+    } else if (g) {
+      dragData = { type: "goal", id: g.getAttribute("data-drag-goal"), el: g };
+      g.classList.add("dragging");
+    }
+    if (dragData && e.dataTransfer) { e.dataTransfer.setData("text/plain", dragData.id); e.dataTransfer.effectAllowed = "move"; }
+  });
+  document.addEventListener("dragend", function () { if (dragData) dragData.el.classList.remove("dragging"); document.querySelectorAll(".dropzone.over").forEach(function (z) { z.classList.remove("over"); }); });
+  document.addEventListener("dragover", function (e) {
+    var z = e.target.closest(".dropzone"); if (!z || !dragData) return;
+    var ok = (z.hasAttribute("data-donezone") && dragData.type === "milestone" && z.getAttribute("data-donezone") === dragData.goal) || (z.id === "parkzone" && dragData.type === "goal");
+    if (ok) { e.preventDefault(); z.classList.add("over"); }
+  });
+  document.addEventListener("dragleave", function (e) { var z = e.target.closest(".dropzone"); if (z) z.classList.remove("over"); });
+  document.addEventListener("drop", function (e) {
+    var z = e.target.closest(".dropzone"); if (!z || !dragData) return;
+    e.preventDefault(); z.classList.remove("over");
+    if (z.hasAttribute("data-donezone") && dragData.type === "milestone" && z.getAttribute("data-donezone") === dragData.goal) {
+      localDone[dragData.id] = true;
+      try { localStorage.setItem("gps-local-done", JSON.stringify(localDone)); } catch (err) {}
+      dragData.el.classList.add("done"); dragData.el.classList.remove("next"); dragData.el.setAttribute("draggable", "false");
+      dragData.el.querySelector(".grip").textContent = "✓";
+      var r = z.getBoundingClientRect(); burst(r.left + r.width / 2, r.top);
+      showCmd("Nice. Make it official →", "Mark milestone done: " + dragData.name + "\nUpdate the goal file, tracking log and refresh the dashboard.");
+    }
+    if (z.id === "parkzone" && dragData.type === "goal") {
+      var g = D.goals.filter(function (x) { return x.id === dragData.id; })[0];
+      showCmd("Park a whole goal", "Park my goal \"" + (g ? g.title : dragData.id) + "\" — move it to the parking lot, free its slot at the next reset, and log the reason I give you.");
+    }
+    dragData = null;
+  });
+  // click fallback (mobile / no-drag): tap a not-done milestone → confirm done
+  document.addEventListener("click", function (e) {
+    var m = e.target.closest("[data-mid]");
+    if (m && m.getAttribute("draggable") === "true" && !e.target.closest(".help")) {
+      var r = m.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + scrollY ? r.top : r.top);
+      localDone[m.getAttribute("data-mid")] = true;
+      try { localStorage.setItem("gps-local-done", JSON.stringify(localDone)); } catch (err) {}
+      m.classList.add("done"); m.classList.remove("next"); m.setAttribute("draggable", "false");
+      m.querySelector(".grip").textContent = "✓";
+      showCmd("Nice. Make it official →", "Mark milestone done: " + m.getAttribute("data-mname") + "\nUpdate the goal file, tracking log and refresh the dashboard.");
+    }
+  });
+
+  // ---------- action modals ----------
   function openAdd() {
     if (D.goals.length >= D.maxGoals) {
-      showCmd("park this idea: <describe it in one line>\n\n(All " + D.maxGoals + " goal slots are full — by design. Parked ideas are reviewed at the week-12 reset, where you can promote one.)");
-      $("#cmd-title").textContent = "Slots are full — park it instead";
+      showCmd("Slots are full — park it instead", "park this idea: <describe it in one line>\n\n(All " + D.maxGoals + " goal slots are full — by design. Parked ideas are reviewed at the week-12 reset.)");
       return;
     }
-    $("#cmd-title").textContent = "One step left";
     $("#dlg-add").showModal();
   }
   $("#b-add").addEventListener("click", openAdd);
@@ -455,44 +529,45 @@ window.GPS_DATA = {
     if (e.target.closest("[data-invite]")) $("#dlg-partner").showModal();
   });
   $("#f-add").addEventListener("submit", function (e) {
-    var f = new FormData(e.target);
-    if (!f.get("what")) return;
+    var f = new FormData(e.target); if (!f.get("what")) return;
     $("#dlg-add").close();
-    showCmd("/gps-onboard — add one goal to my current cycle:\nGoal: " + f.get("what") + "\nMetric & target: " + f.get("metric") + "\nWhy: " + f.get("why") + "\nWalk me through milestones, the 80% checks, obstacles and if-thens.");
+    showCmd("One step left", "/gps-onboard — add one goal to my current cycle:\nGoal: " + f.get("what") + "\nMetric & target: " + f.get("metric") + "\nWhy: " + f.get("why") + "\nWalk me through milestones, the 80% checks, obstacles and if-thens.");
     e.target.reset();
   });
-
   $("#b-adjust").addEventListener("click", function () {
     $("#adj-goal").innerHTML = D.goals.map(function (g) { return "<option>" + esc(g.title) + "</option>"; }).join("");
     $("#dlg-adjust").showModal();
   });
   $("#f-adjust").addEventListener("submit", function (e) {
     var f = new FormData(e.target);
-    if (!f.get("desc") && f.get("kind").indexOf("stuck") < 0) return;
+    if (!f.get("desc") && String(f.get("kind")).indexOf("stuck") < 0) return;
     $("#dlg-adjust").close();
-    $("#cmd-title").textContent = "One step left";
-    showCmd("Adjust my GPS plan — " + f.get("goal") + "\nChange: " + f.get("kind") + "\nDetails: " + (f.get("desc") || "help me figure out what to change") + "\nLog it in the goal's scope-change section and update the dashboard.");
+    showCmd("One step left", "Adjust my GPS plan — " + f.get("goal") + "\nChange: " + f.get("kind") + "\nDetails: " + (f.get("desc") || "help me figure out what to change") + "\nLog it in the goal's scope-change section and update the dashboard.");
     e.target.reset();
   });
-
   $("#b-partner").addEventListener("click", function () { $("#dlg-partner").showModal(); });
   $("#f-partner").addEventListener("submit", function (e) {
-    var f = new FormData(e.target);
-    if (!f.get("name")) return;
+    var f = new FormData(e.target); if (!f.get("name")) return;
     $("#dlg-partner").close();
-    $("#cmd-title").textContent = "One step left";
-    showCmd("/gps-partner — invite " + f.get("name") + " as my accountability partner via " + f.get("channel") + " (" + f.get("handle") + "). Draft the invitation for my approval.");
+    showCmd("One step left", "/gps-partner — invite " + f.get("name") + " as my accountability partner via " + f.get("channel") + " (" + f.get("handle") + "). Draft the invitation for my approval.");
+    e.target.reset();
+  });
+  $("#parkzone").addEventListener("click", function () { $("#dlg-park").showModal(); });
+  $("#f-park").addEventListener("submit", function (e) {
+    var f = new FormData(e.target); if (!f.get("idea")) return;
+    $("#dlg-park").close();
+    showCmd("Parked (almost)", "park this idea: " + f.get("idea"));
     e.target.reset();
   });
 
   // ---------- tour ----------
   var TOUR = [
-    { sel: "#t-hud", t: "You are here", x: "The whole 12-week cycle as one road. The yellow dot is today; the ticks are your milestone dates. If the blue line stalls, so did you." },
-    { sel: "#goals", t: "Your goals — max 3", x: "Each card: the metric, the very next action, and dated milestones. The empty slot is allowed to stay empty — fewer goals, fully executed, wins." },
-    { sel: "#t-score", t: "The scorecard", x: "Filled every Sunday. Numbers, not vibes. Recording progress is the strongest lever in the goal research (138-study meta-analysis)." },
-    { sel: "#t-anti", t: "Anti-goals", x: "The lines you won't cross to get there — sleep, family, focus. Violating one turns a green week red. That's intentional." },
-    { sel: "#t-partner", t: "The multiplier", x: "One person receiving your weekly report roughly doubled success rates in the research. Invite someone when you're ready — you approve every message first." },
-    { sel: "#t-header", t: "Everything is one click", x: "Add a goal, adjust the plan, invite a partner — each ends with a small note you paste into Claude Code. The ? buttons explain everything else. That's the whole app." }
+    { sel: "#t-road", t: "Your 12 weeks, as a road", x: "The car is today. The signposts are your milestone dates. If the blue line stalls, so did you — no interpretation needed." },
+    { sel: "#t-cols", t: "G · P · S", x: "Goal (where + why), Plan (the dated route), System (the machine that keeps you moving). Most tools stop at G. The whole method is that all three exist, in writing." },
+    { sel: "#lanes", t: "Cards, not chores", x: "Each goal is one lane. The highlighted plan card is your current step — drag it onto ✓ when it's done and enjoy the confetti. Every action ends as a small note you paste into Claude." },
+    { sel: "#t-score", t: "Sunday truth", x: "Scored weekly: shipped or not. Recording progress is the strongest lever in the research (138-study meta-analysis)." },
+    { sel: "#parkzone", t: "The shiny-object trap", x: "New ideas are welcome — in the parking lot. Drag a goal here to park it, click to park an idea. Reviewed at week 12, promoted only if it beats what you're doing." },
+    { sel: "#t-credits", t: "Standing on giants", x: "The GPS frame is Ali Abdaal's (he credits Alex Hormozi). We pressure-tested every step against the actual research and kept what survives. Open source — share it." }
   ];
   var ti = 0, scrim = $("#tour-scrim"), card = $("#tour-card"), spot = null;
   function tourShow(i) {
@@ -511,7 +586,7 @@ window.GPS_DATA = {
       var top = r.bottom + 12 + ch < innerHeight ? r.bottom + 12 : Math.max(12, r.top - ch - 12);
       card.style.top = top + "px";
       card.style.left = Math.max(12, Math.min(r.left, innerWidth - card.offsetWidth - 12)) + "px";
-    }, 250);
+    }, 260);
   }
   function tourEnd() {
     if (spot) spot.classList.remove("tour-spot");
