@@ -31,6 +31,13 @@ Read `CLAUDE.md`, `method/gps-adapted.md`, and `data/config.json` first. This is
      the base rate in `data/profile.md`.
    - **WOOP**: pre-mortem obstacles, then ≥3 if-thens covering the profile's
      obstacle classes.
+   - **Operating procedure (machine test)**: ask whether the goal is reached by
+     *repeating a unit of work* (an experiment, a weekly ship, a session) whose steps
+     the milestones don't already spell out. If YES, build the ordered step-by-step for
+     ONE unit with the owner (how to pick/start it, do it, close and log it) — the goal
+     is not fully set up without it; if it has a per-unit ledger, create that file too.
+     If NO (one-shot deliverable, milestones are the steps), delete the section — no
+     empty circuitry.
 5. **Write** `data/goals/<cycle>/g<N>-<slug>.md` per goal, fully filled.
 6. **Initialize `data/tracking/scorecard.md`**: goals × W1–W12 (real dates) + anti row.
 7. **Create `data/tracking/YYYY-MM.md`** if missing, with the format header.

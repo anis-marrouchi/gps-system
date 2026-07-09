@@ -13,6 +13,10 @@ Tone from `data/config.json`. Read `CLAUDE.md`, `data/config.json`, active goal 
 1. **Compute the week**: per goal, % of planned actions done (tracking lines +
    corroborating git activity), milestone status vs dates, days untouched.
    Anti-goals: violations, dated.
+   - **Machine check**: for each goal reached by repeating a unit of work, confirm its
+     file has a filled `## Operating procedure`. A repeatable goal missing one can't be
+     executed as a machine — surface it as an open question to fill (via the onboard
+     step 4 procedure), not as normal progress.
 2. **Update `data/tracking/scorecard.md`** (this week's column).
 3. **Write the draft** `data/reviews/weekly/YYYY-Wnn.md`:
    - Scorecard table + one-line verdict per goal (`ON TRACK` / `SLIPPING: <fact>` /

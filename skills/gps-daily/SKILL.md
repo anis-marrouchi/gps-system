@@ -17,7 +17,8 @@ files in the current cycle dir, `data/goals/anti-goals.md`, and the last ~7 line
    appending a duplicate). No active goals → send one `[GPS] No active cycle. Run
    /gps-onboard.` message (max once; check the log).
 2. **Derive today's single lead action per goal** from milestones and recent tracking.
-   One action each, concrete, doable today.
+   One action each, concrete, doable today. If a goal has an `## Operating procedure`,
+   the lead action is its next un-done step for the current unit — not a re-invented one.
 3. **Append the tracking line** to `data/tracking/YYYY-MM.md` (create from the format
    header if needed), marking yesterday's outcomes from available evidence (git
    activity, the owner's `done`/`skip` replies since the last nudge, read via the

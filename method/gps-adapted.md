@@ -42,6 +42,17 @@ modes (captured during onboarding into `data/profile.md`).
 
 ## S — System
 
+0. **Operating procedure (the machine itself)**, required *only* for goals reached by
+   **repeating a unit of work** — a learning goal's experiment, a weekly ship, a
+   training session. It's the driving checklist: the ordered steps to run ONE unit
+   start-to-close (how to pick/start it, do it, close and log it), concrete enough to
+   execute without re-deciding. A goal's milestones say *where*; the procedure says
+   *how you actually drive*. **The machine test:** is this goal reached by repeating a
+   unit whose steps the milestones don't already spell out? Yes → the goal is not fully
+   set up until the procedure exists. No (a one-shot deliverable whose milestones *are*
+   the steps) → **omit the section entirely; never leave dead, unused circuitry.** Fill
+   triggers: onboarding writes it at creation for repeatable goals; the weekly review
+   flags any repeatable goal missing one and forces the fill.
 1. **Tracking** (Harkin et al. — the strongest lever): one line per goal per day in
    `data/tracking/`, plus the weekly scorecard.
 2. **WOOP pre-mortem, not visualization** (Oettingen): Wish → Outcome → Obstacles

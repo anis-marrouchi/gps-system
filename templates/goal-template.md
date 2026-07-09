@@ -46,6 +46,17 @@ rewrite it.>
   | | |
   | | |
 
+<!-- OPERATING PROCEDURE — the machine test:
+     Is this goal reached by REPEATING a unit of work (an experiment, a weekly ship, a
+     session) whose steps the milestones don't already spell out? If YES, fill the
+     section below with the ordered steps to run ONE unit start-to-close. If NO (a
+     one-shot deliverable whose milestones already ARE the steps), DELETE this whole
+     section — never leave it blank. No unused circuitry. -->
+## Operating procedure
+<Numbered steps to run ONE unit of this goal, in order: how to start/pick it, how to do
+the work, how to close and log it. Concrete enough to execute without re-deciding.
+Reference the per-unit ledger/tracking file if the goal has one.>
+
 ## System
 - Tracked daily: <what one line gets logged>
 - Weekly scorecard measure: <how the % is computed>
