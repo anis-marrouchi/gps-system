@@ -26,8 +26,9 @@ Tone from `data/config.json`. Read `CLAUDE.md`, `data/config.json`, active goal 
    - Next week's WOOP re-check: the most likely obstacle THIS week + its if-then.
    - **If partner configured**: a drafted partner report (short, factual scorecard
      summary) marked `PENDING OWNER APPROVAL`.
-4. **Send summons** to the owner per the channel-dispatch rules in `CLAUDE.md`:
-   `[GPS] Wnn scorecard: g1 71% · g2 40% SLIPPING (M2 +1w) · anti: 2 late nights. Run /gps-weekly to close it.`
+4. **Send summons** to the owner per the channel-dispatch rules in `CLAUDE.md`,
+   ending with the dashboard link (home base) when config has `dashboard_artifact_url`:
+   `[GPS] Wnn scorecard: g1 71% · g2 40% SLIPPING (M2 +1w) · anti: 2 late nights. Run /gps-weekly to close it. 📍 <dashboard_artifact_url>`
 5. Never send anything to the partner in Mode A.
 
 ## Mode B — interactive completion (owner runs /gps-weekly)

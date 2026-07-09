@@ -91,6 +91,20 @@ The self-hosted framework is and stays free (MIT). Planned paid layer:
 
 Interested? Open an issue titled `interest: hosted accountability`.
 
+## Documentation map
+
+You should never *need* these — the system teaches itself on the journey: `/gps-onboard`
+walks you through setup, then your **dashboard** (with a built-in tour and a `?` on every
+part) is your home base, and a daily `why g1` reply explains any goal in plain terms. The
+docs below are for going deeper, in reading order:
+
+1. **This README** — what it is, why, quick start *(you are here)*.
+2. [`examples/goal-example.md`](examples/goal-example.md) — one fully-filled goal, end to end.
+3. [`method/gps-adapted.md`](method/gps-adapted.md) — the method: every G/P/S rule and why it's shaped that way.
+4. [`method/science-notes.md`](method/science-notes.md) — the evidence, with citations.
+5. [`CLAUDE.md`](CLAUDE.md) — the operating manual Claude follows to run your rituals.
+6. [`docs/hosted-accountability.md`](docs/hosted-accountability.md) — the planned paid layer (see roadmap above).
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Your data never leaves your machine except the messages

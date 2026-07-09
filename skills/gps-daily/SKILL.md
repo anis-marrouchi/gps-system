@@ -31,9 +31,14 @@ files in the current cycle dir, `data/goals/anti-goals.md`, and the last ~7 line
    g1 <slug>: <today's lead action>
    g2 <slug>: <today's lead action>
    anti: <the one or two checks that matter today> · streak: <n>d clean
-   Reply done/skip per goal anytime — I log it.
+   Reply done/skip per goal anytime — I log it · "why g1" = the how & the science
+   📍 <dashboard_artifact_url from config, if set>
    ```
 
+   The dashboard link and the `why` invite are the owner's route to guidance — the
+   home base is the dashboard (tour + inline help), never a raw file. A `why <gN>`
+   reply is answered from that goal's file (Operating procedure + WOOP) in plain terms.
+   Omit the 📍 line if config has no `dashboard_artifact_url`.
    Drift callouts per config tone: `full-scorecard` → `g2: untouched 5d`.
 5. **Send** per the channel-dispatch rules in `CLAUDE.md` (whatsapp / email /
    telegram / none). Only ever to the owner — never the partner.

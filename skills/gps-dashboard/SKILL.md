@@ -21,6 +21,11 @@ session that didn't originally publish it). Never mint a new URL. Favicon stays 
    the `window.GPS_DATA = {...}` JSON block with real data (schema documented at the
    top of the template). Do not alter markup/CSS/JS — design changes happen in the
    template and get committed.
+   - **Operating procedure**: for any goal whose file has a filled `## Operating
+     procedure`, populate that goal's `procedure` (array of short step labels, one per
+     step — trim each to a phrase, the full text lives in the goal file) and `unit`
+     (the thing repeated, e.g. `experiment`, `week`, `session`). Omit both for one-shot
+     goals — the card renders nothing, no empty circuitry.
 3. Publish with the Artifact tool (title `GPS — <cycle>`); if config has no
    `dashboard_artifact_url` yet, save the returned URL into config.
 4. If the template itself changed, commit it: `feat(dashboard): <what changed>`.

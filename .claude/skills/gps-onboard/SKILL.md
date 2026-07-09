@@ -41,5 +41,8 @@ Read `CLAUDE.md`, `method/gps-adapted.md`, and `data/config.json` first. This is
 5. **Write** `data/goals/<cycle>/g<N>-<slug>.md` per goal, fully filled.
 6. **Initialize `data/tracking/scorecard.md`**: goals × W1–W12 (real dates) + anti row.
 7. **Create `data/tracking/YYYY-MM.md`** if missing, with the format header.
-8. Close with the first nudge time and the single next action per goal. Offer
-   `/gps-dashboard` to publish their dashboard.
+8. Close with the first nudge time and the single next action per goal. **Publish the
+   dashboard** (`/gps-dashboard`) and hand the owner its URL as their home base — tell
+   them to take the built-in tour once and that everything (what each part means, where
+   they are, how to run each goal) lives there and behind the daily `why <gN>` reply.
+   They should never need to open a raw file or the repo.

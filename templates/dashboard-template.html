@@ -435,6 +435,10 @@
   .scard .v { color: var(--ink-soft); }
   .scard.cta { border-style: dashed; cursor: pointer; background: none; width: 100%; text-align: left; }
   .scard.cta:hover { border-color: var(--route); background: var(--route-soft); }
+  .scard.proc { box-shadow: inset 3px 0 0 var(--pos); }
+  .scard.proc:hover { box-shadow: inset 3px 0 0 var(--pos), var(--shadow-sm); }
+  .proc-steps { margin: 5px 0 0; padding-left: 17px; color: var(--ink-soft); font-size: 12.5px; line-height: 1.5; }
+  .proc-steps li { margin: 1px 0; }
 
   .slotcard { border: 1.5px dashed var(--panel-edge); border-radius: var(--radius); min-height: 118px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: var(--ink-soft); background: none; font-size: 13.5px; font-weight: 600; width: 100%; transition: border-color .15s, color .15s, background .15s, transform .12s; }
   .slotcard:hover { border-color: var(--route); color: var(--route); background: var(--route-soft); transform: translateY(-2px); }
@@ -823,6 +827,7 @@ window.GPS_DATA = {
         }).join("") +
       '</div></div>' +
       '<div><span class="label mob-label" style="margin-bottom:6px">System</span><div class="sys">' +
+        (g.procedure && g.procedure.length ? '<div class="card scard proc"><span class="body"><span class="k">How I run one ' + esc(g.unit || "unit") + '</span><ol class="proc-steps">' + g.procedure.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + '</ol></span></div>' : "") +
         (g.system || []).map(function (s) {
           return '<div class="card scard"><span class="body"><span class="k">' + esc(s.k) + '</span><span class="v">' + esc(s.v) + '</span></span></div>';
         }).join("") +
@@ -860,7 +865,7 @@ window.GPS_DATA = {
   var HELP = {
     G: { t: "G — the destination", x: "One measurable outcome, an honest why, and anti-goals (lines you won't cross to get there). Vague goals like \"get fit\" get rejected at onboarding.", s: "Locke & Latham (specificity); Bryan et al. (identity)" },
     P: { t: "P — the route", x: "3–5 dated milestones, sanity-checked twice: does it make sense, and — knowing yourself — will you actually do it? Under 80% confidence → shrink it. The highlighted card is your current step.", s: "The 80% checks are Abdaal's; the pre-mortem is Oettingen's WOOP" },
-    S: { t: "S — the machine", x: "This is the part most people never define: WHAT gets tracked, WHEN you're reminded, WHICH if-then plans are armed for your known obstacles, and WHO sees your weekly report. If you can't point at these four, you don't have a system yet — you have a wish.", s: "Harkin et al. 2016 (tracking); Gollwitzer (if-thens); Matthews (accountability)" },
+    S: { t: "S — the machine", x: "This is the part most people never define. Five things: HOW you run one unit of the goal step-by-step (the operating procedure — your driving checklist, for goals you repeat a unit of), WHAT gets tracked, WHEN you're reminded, WHICH if-then plans are armed for your known obstacles, and WHO sees your weekly report. If you can't point at these, you don't have a system yet — you have a wish.", s: "Harkin et al. 2016 (tracking); Gollwitzer (if-thens); Matthews (accountability)" },
     scorecard: { t: "The weekly scorecard", x: "Every Sunday the week gets scored per goal — shipped or not, numbers not vibes. Recording progress is the single strongest lever the research has found.", s: "Harkin et al. 2016 — meta-analysis, 138 studies" }
   };
   var pop = $("#pop");
@@ -1021,7 +1026,7 @@ window.GPS_DATA = {
   // ---------- tour ----------
   var TOUR = [
     { sel: "#t-road", t: "Your 12 weeks, as a road", x: "The marker is today. The ticks are your milestone dates. If the blue line stalls, so did you — no interpretation needed." },
-    { sel: "#t-cols", t: "G · P · S", x: "Goal (where + why), Plan (the dated route), System (the machine that keeps you moving). Most tools stop at G. The whole method is that all three exist, in writing." },
+    { sel: "#t-cols", t: "G · P · S", x: "Goal (where + why), Plan (the dated route), System (the machine: how you run one unit step-by-step, what's tracked, the if-thens, who holds you to it). Most tools stop at G. The whole method is that all three exist, in writing." },
     { sel: "#lanes", t: "Cards, not chores", x: "Each goal is one lane. Click any plan card to see its details, adjust it, or mark it done — or drag it onto the ✓ zone. Nothing changes until you choose an action." },
     { sel: "#t-score", t: "Sunday truth", x: "Scored weekly: shipped or not. The strip shows where you are and the road ahead. Recording progress is the strongest lever in the research (138-study meta-analysis)." },
     { sel: "#parkzone", t: "The shiny-object trap", x: "New ideas are welcome — in the parking lot. Drag a goal here to park it, click to park an idea. Reviewed at week 12, promoted only if it beats what you're doing." },
