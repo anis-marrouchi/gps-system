@@ -63,6 +63,7 @@ Partner messages use the partner's own `channel` from config, same dispatch rule
 | Skill | When | Scheduled? |
 |---|---|---|
 | `/gps-onboard` | Start of a cycle | Manual, interactive |
+| `/gps-goal` | Revise or replace one existing goal mid-cycle | Manual, interactive |
 | `/gps-daily` | `nudge_time` daily | Yes (launchd, see system/) |
 | `/gps-weekly` | Sunday evening prep; owner completes | Yes (prep run) |
 | `/gps-monthly` | 1st of month | Yes |
