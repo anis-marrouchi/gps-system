@@ -792,22 +792,28 @@ window.GPS_DATA = {
   // ---------- hero ----------
   $("#cy-name").textContent = D.cycle.name;
   $("#cy-range").textContent = D.cycle.start + " → " + D.cycle.end;
-  $("#cy-day").textContent = D.cycle.day;
-  $("#cy-of").innerHTML = "<span class='u'>DAY OF</span> " + D.cycle.totalDays;
-  // pace: is progress keeping up with time elapsed?
-  var timePct = (D.cycle.day / D.cycle.totalDays) * 100;
-  var lead = D.route.donePct - timePct;
-  var pace = $("#cy-pace"), paceT = $("#cy-pace-t");
-  if (D.cycle.day <= 1) { paceT.textContent = "Fresh start · week 1"; }
-  else if (lead >= -2) { paceT.textContent = "On pace"; }
-  else if (lead >= -8) { pace.style.background = "var(--warn-soft)"; pace.style.color = "var(--warn)"; pace.style.borderColor = "color-mix(in srgb, var(--warn) 28%, transparent)"; paceT.textContent = "Slightly behind"; }
-  else { pace.style.background = "var(--bad-soft)"; pace.style.color = "var(--bad)"; pace.style.borderColor = "color-mix(in srgb, var(--bad) 28%, transparent)"; paceT.textContent = "Falling behind"; }
-
-  // derive real calendar dates for each timeline marker from the cycle window
+  // --- LIVE timeline: position computed from today's real date, so it advances on its own ---
   var MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var yr = parseInt(String(D.generated).slice(0, 4), 10) || new Date().getFullYear();
   function parseMD(s) { var p = String(s).split(/\s+/); var mi = MO.indexOf(p[0]); return new Date(yr, mi < 0 ? 0 : mi, parseInt(p[1], 10) || 1); }
   var startD = parseMD(D.cycle.start);
+  var _today = new Date(); _today.setHours(0, 0, 0, 0);
+  var _elapsed = Math.round((_today - startD) / 86400000);            // 0 on the start day
+  var liveDay = Math.max(1, Math.min(D.cycle.totalDays, _elapsed + 1));
+  var youPct = Math.max(0, Math.min(100, _elapsed / (D.cycle.totalDays - 1) * 100));  // TODAY marker = time elapsed
+  var _md = 0, _mt = 0;
+  (D.goals || []).forEach(function (g) { (g.milestones || []).forEach(function (m) { _mt++; if (m.done || localDone[m.id]) _md++; }); });
+  var donePct = _mt ? (_md / _mt * 100) : 0;                          // blue line = actual progress (milestones done)
+  $("#cy-day").textContent = liveDay;
+  $("#cy-of").innerHTML = "<span class='u'>DAY OF</span> " + D.cycle.totalDays;
+  // pace: is progress (blue) keeping up with time (today marker)?
+  var timePct = (liveDay / D.cycle.totalDays) * 100;
+  var lead = donePct - timePct;
+  var pace = $("#cy-pace"), paceT = $("#cy-pace-t");
+  if (liveDay <= 1) { paceT.textContent = "Fresh start · week 1"; }
+  else if (lead >= -2) { paceT.textContent = "On pace"; }
+  else if (lead >= -8) { pace.style.background = "var(--warn-soft)"; pace.style.color = "var(--warn)"; pace.style.borderColor = "color-mix(in srgb, var(--warn) 28%, transparent)"; paceT.textContent = "Slightly behind"; }
+  else { pace.style.background = "var(--bad-soft)"; pace.style.color = "var(--bad)"; pace.style.borderColor = "color-mix(in srgb, var(--bad) 28%, transparent)"; paceT.textContent = "Falling behind"; }
   function pctDate(pct) { var d = new Date(startD); d.setDate(d.getDate() + Math.round(pct / 100 * D.cycle.totalDays)); return MO[d.getMonth()] + " " + d.getDate(); }
   function atLeft(pct) { return "calc(28px + (100% - 56px) * " + (pct / 100).toFixed(4) + ")"; }
   function fillW(pct) { return "calc((100% - 56px) * " + (pct / 100).toFixed(4) + ")"; }
@@ -823,13 +829,14 @@ window.GPS_DATA = {
   // animate road fill + marker after paint
   setTimeout(function () {
     var done = $("#road .done"), you = $("#road .you");
-    if (done) done.style.width = fillW(D.route.donePct);
-    if (you) you.style.left = atLeft(D.route.youPct);
+    if (done) done.style.width = fillW(donePct);
+    if (you) you.style.left = atLeft(youPct);
   }, reduce ? 0 : 120);
 
   $("#hud-stats").innerHTML = D.stats.map(function (s) {
     var t = s.tone === "bad" ? " t-bad" : s.tone === "warn" ? " t-warn" : "";
-    return '<div class="chip' + t + '"><span class="k">' + esc(s.label) + '</span><span class="v din">' + esc(s.value) + (s.sub ? '<small> ' + esc(s.sub) + '</small>' : '') + '</span></div>';
+    var val = String(s.label).toLowerCase() === "day" ? liveDay : s.value;  // keep the Day chip live
+    return '<div class="chip' + t + '"><span class="k">' + esc(s.label) + '</span><span class="v din">' + esc(val) + (s.sub ? '<small> ' + esc(s.sub) + '</small>' : '') + '</span></div>';
   }).join("");
 
   // ---------- lanes ----------
